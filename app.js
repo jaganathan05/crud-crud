@@ -18,7 +18,7 @@ function getacall(event) {
   .then(function (response) {
     // Handle the API response if needed (optional)
     console.log('User details successfully stored in the cloud:', response.data);
-
+    
     // Call the function to show the user details on the web page
     showUserDetails(response.data);
   })
@@ -40,6 +40,39 @@ function getacall(event) {
 //       var newDetails = [userDetails];
 //       localStorage.setItem('userDetails', JSON.stringify(newDetails));
 //   }
+
+window.addEventListener("DOMContentLoaded",()=> {
+    axios.get('https://crudcrud.com/api/48998a2332e14822918da7c675ae6853/userdetails')
+    .then(function (response) {
+       
+        console.log('User details successfully stored in the cloud:', response.data);
+        
+        for (let i=0 ; i<response.data.length ; i++){
+        showUserDetails(response.data[i]);}
+      })
+      .catch(function (error) {
+        console.error('Error storing user details in the cloud:', error);
+      
+      });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function showUserDetails(user) {
     // Display the user details on the web page
