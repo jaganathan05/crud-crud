@@ -1,4 +1,3 @@
-
 function getacall(event) {
     event.preventDefault();
   
@@ -15,6 +14,7 @@ function getacall(event) {
       date: date,
       time: time
     };
+  
     axios.post('https://crudcrud.com/api/48998a2332e14822918da7c675ae6853/userdetails', userDetails)
       .then(function (response) {
         // Handle the API response if needed (optional)
@@ -28,8 +28,6 @@ function getacall(event) {
         // Handle the error if needed (optional)
       });
   }
-  
-  // Retrieve existing user details from local storage (You can implement this later if needed)
   
   window.addEventListener("DOMContentLoaded", () => {
     axios.get('https://crudcrud.com/api/48998a2332e14822918da7c675ae6853/userdetails')
@@ -46,7 +44,6 @@ function getacall(event) {
   });
   
   function showUserDetails(user) {
-    // Display the user details on the web page
     var userDetailsContainer = document.createElement("div");
     userDetailsContainer.innerHTML = "<h3>User Details:</h3>" +
       "<p>Name: " + user.name + "</p>" +
@@ -54,18 +51,47 @@ function getacall(event) {
       "<p>Phone Number: " + user.phoneNumber + "</p>" +
       "<p>Time for Call: " + user.date + " " + user.time + "</p>";
   
-    // Create a delete button
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function () {
-      // Call the function to delete the user detail
       deleteUserDetail(user._id);
-      // Remove the userDetailsContainer from the DOM
       userDetailsContainer.remove();
     });
   
-    // Append the delete button to the userDetailsContainer
+    var editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", function () {
+      // Set the form values to the stored user details for editing
+      document.getElementById('name').value = user.name;
+      document.getElementById('email').value = user.email;
+      document.getElementById('tel').value = user.phoneNumber;
+      document.getElementById('date').value = user.date;
+      document.getElementById('time').value = user.time;
+  
+      userDetailsContainer.remove(); // Remove the userDetailsContainer from the DOM
+  
+      var updatedUserDetails = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phoneNumber: document.getElementById('tel').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value
+      };
+  
+      // Update the user details in the cloud storage using Axios
+      axios.put('https://crudcrud.com/api/48998a2332e14822918da7c675ae6853/userdetails/' + user._id, updatedUserDetails)
+        .then(function (response) {
+          console.log('User details updated successfully:', response.data);
+          // Call the function to show the updated user details on the web page
+          showUserDetails(response.data);
+        })
+        .catch(function (error) {
+          console.error('Error updating user details:', error);
+        });
+    });
+  
     userDetailsContainer.appendChild(deleteButton);
+    userDetailsContainer.appendChild(editButton);
   
     document.body.appendChild(userDetailsContainer);
   }
