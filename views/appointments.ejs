@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Appointments</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
+    </head>
+    
+    <body>
+        <div class="backdrop"></div>
+    <header class="main-header">
+        <button id="side-menu-toggle">Menu</button>
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a class="<%= path === '/' ? 'active' : '' %>" href="/">Book</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/appointments' ? 'active' : '' %>" href="/appointments">Appointments</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="mobile-nav">
+            <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/appointments' ? 'active' : '' %>" href="/appointments">Appointments</a>
+                    </li>
+                </ul>
+    </nav>
+
+            <main>
+                <h1 style="text-align: center;">User Details</h1>
+                <% if (users.length > 0) { %>
+                    <div class="grid">
+                        <% for (let user of users) { %>
+                            <article class="card product-item">
+                                <header class="card__header">
+                                    <h5 class="product__title">
+                                        <%= user.Name %><br>
+                                        <%= user.Email %><br>
+                                        <%= user.PhoneNo %><br>
+                                        <%= user.Date %><br>
+                                        <%= user.Time %><br>
+
+                                    </h5>
+                                </header>
+                                <div class="card__actions">
+                                    <a href="/edit-user/<%=user.Id %>?edit=true" class="btn">Edit</a>
+                                    <form action="/delete-user" method="POST">
+                                        <input type="hidden" value="<%= user.Id %>" name="userId">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Users Found!</h1>
+                        <% } %>
+            </main>
+            <script src="/js/main.js"></script>
+</body>
+
+</html>

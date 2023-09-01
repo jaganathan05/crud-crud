@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <header class="main-header">
+        <button id="side-menu-toggle">Menu</button>
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a class="<%= path === '/' ? 'active' : '' %>" href="/">Book</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/appointments' ? 'active' : '' %>" href="/appointments">Appointments</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="mobile-nav">
+            <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/appointments' ? 'active' : '' %>" href="/appointments">Appointments</a>
+                    </li>
+                </ul>
+    </nav>
+    <div class="container-sm">
+        <form action="/" method="post">
+            <h1 class="text-center">Book Appointment</h1>
+            <p class="text-center">Book appointment call slot, our representative will call you within one hour of the selected time</p>
+            <hr><br>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="tel">Phone Number:</label>
+                <input type="tel" class="form-control" id="tel" name="tel" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time For Call:</label>
+                <div class="row">
+                    <div class="col-md-6" >
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block">Get A Call</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/main.js">
+        
+    </script>
+</body>
+
+</html>
